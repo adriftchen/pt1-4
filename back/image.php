@@ -3,10 +3,9 @@
         <form method="post" target="back" action="./api/edit.php">
     <table width="100%">
     	<tbody><tr class="yel">
-        	<td width="60%">校園映像資料圖片</td>
+        	<td width="70%">校園映像資料圖片</td>
             <td width="10%">顯示</td>
             <td width="10%">刪除</td>
-            <td></td>
             <td></td>
                     </tr>
             <?php
@@ -14,7 +13,7 @@
             $div=3;
             $pages=ceil($all/$div);
             $now=(isset($_GET['p']))?$_GET['p']:1;
-            $start=($now-1)*$now;
+            $start=($now-1)*$div;
 
             $rows=$Image->all(" limit $start,$div");
             foreach($rows as $row){
@@ -31,6 +30,34 @@
             }
             ?>
     </tbody></table>
+    <div class="cent">
+    <?php
+    if(($now-1)>0){
+        ?>
+        <a href="?do=image&p=<?=$now-1;?>" class="bl" style="font-size:30px">&lt;&nbsp;</a>
+        <?php
+    }
+    ?>
+    <?php
+    for($i=1;$i<=$pages;$i++){
+        if($i==$now){
+            $ft="40px";
+        }else{
+            $ft="30px";
+        }
+        echo "<a href='?do=image&p=$i' style='font-size:$ft' style='text-decoration:none'> ";
+        echo $i;
+        echo " </a>";
+    }
+        ?>
+   <?php
+    if(($now+1)<=$pages){
+        ?>
+        <a href="?do=image&p=<?=$now+1;?>" class="bl" style="font-size:30px">&nbsp;&gt;</a>
+        <?php
+    }
+    ?>
+    </div>
            <table style="margin-top:40px; width:70%;">
      <tbody><tr>
       <input type="hidden" name="table" value="<?=$do;?>">
