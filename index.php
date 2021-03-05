@@ -30,7 +30,7 @@
 													?>
 													<div class="mainmu">
 														<a href="<?=$main['href'];?>"><?=$main['text'];?></a>
-														<div class="mw">
+														<div class="mw" style="dislpay:none;position:relative;top:-5px;z-index:80;width:150px;margin-left:100px">
 															<?php
 															if($Menu->count(['parent'=>$main['id']])>0){
 																$subs=$Menu->all(['parent'=>$main['id']]);
